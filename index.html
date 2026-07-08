@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="We're building something awesome. Coming soon!"/>
+<title>Under Construction · Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:      #08090F;
+  --violet:  #7C3AED;
+  --purple:  #A855F7;
+  --pink:    #EC4899;
+  --sky:     #38BDF8;
+  --lime:    #84CC16;
+  --white:   #F0EFF8;
+  --muted:   #55556A;
+  --glass:   rgba(255,255,255,0.04);
+  --gborder: rgba(255,255,255,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── BLOBS ── */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+  animation: blobmove 20s ease-in-out infinite alternate;
+}
+.b1 { width:500px;height:500px;background:var(--violet);top:-150px;left:-150px;animation-duration:18s; }
+.b2 { width:400px;height:400px;background:var(--pink);bottom:-100px;right:-100px;animation-duration:22s;animation-direction:alternate-reverse; }
+.b3 { width:300px;height:300px;background:var(--sky);top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:14s; }
+
+@keyframes blobmove {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(30px,25px) scale(1.1); }
+}
+
+/* Grid overlay */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* ── MAIN CARD ── */
+.card {
+  position: relative;
+  z-index: 10;
+  max-width: 640px;
+  width: 90%;
+  background: var(--glass);
+  border: 1px solid var(--gborder);
+  border-radius: 28px;
+  padding: 3.5rem 3rem;
+  backdrop-filter: blur(24px);
+  text-align: center;
+  box-shadow: 0 0 80px rgba(124,58,237,0.12);
+}
+
+/* Top badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  color: var(--purple);
+  background: rgba(168,85,247,0.1);
+  border: 1px solid rgba(168,85,247,0.25);
+  padding: 0.35rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 2rem;
+  letter-spacing: 0.1em;
+}
+
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(132,204,22,0.4); }
+  50%      { opacity:0.6; box-shadow: 0 0 0 5px rgba(132,204,22,0); }
+}
+
+/* Icon */
+.icon-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.8rem;
+}
+
+.icon-main {
+  font-size: 4.5rem;
+  display: block;
+  animation: floaticon 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 24px rgba(168,85,247,0.6));
+}
+
+@keyframes floaticon {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-10px) rotate(3deg); }
+}
+
+.icon-ring {
+  position:absolute;
+  inset:-16px;
+  border-radius:50%;
+  border: 1.5px dashed rgba(168,85,247,0.3);
+  animation: spin 12s linear infinite;
+}
+
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+/* Headline */
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+h1 .grad {
+  background: linear-gradient(135deg, var(--violet), var(--pink), var(--sky));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200%;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 420px;
+  margin: 0 auto 2.5rem;
+}
+
+/* Progress bar */
+.progress-wrap {
+  margin-bottom: 2.5rem;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.progress-track {
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--violet), var(--pink), var(--sky));
+  background-size: 200%;
+  animation: fillprog 2.5s ease forwards, shimmer 3s linear infinite;
+}
+
+@keyframes fillprog {
+  from { width: 0%; }
+  to   { width: 68%; }
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.cd-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--gborder);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  min-width: 70px;
+}
+
+.cd-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.cd-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--gborder);
+  margin: 0 0 2rem;
+}
+
+/* Notify form */
+.notify-row {
+  display: flex;
+  gap: 0.6rem;
+  max-width: 400px;
+  margin: 0 auto 2rem;
+}
+
+.notify-input {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--gborder);
+  border-radius: 100px;
+  padding: 0.75rem 1.2rem;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.notify-input::placeholder { color: var(--muted); }
+.notify-input:focus { border-color: rgba(168,85,247,0.5); }
+
+.notify-btn {
+  padding: 0.75rem 1.4rem;
+  background: linear-gradient(135deg, var(--violet), var(--purple));
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.notify-btn:hover { opacity: 0.85; transform: scale(1.03); }
+
+.notify-success {
+  display: none;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  color: var(--lime);
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+/* Social links */
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 100px;
+  background: var(--glass);
+  border: 1px solid var(--gborder);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.social-btn:hover {
+  background: rgba(168,85,247,0.15);
+  border-color: rgba(168,85,247,0.35);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Tech pills at bottom */
+.tech-row {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tech-pill {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.65rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* Corner logo */
+.corner-logo {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.8rem;
+  z-index: 20;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: var(--purple);
+  letter-spacing: 0.05em;
+}
+
+/* Particles */
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: var(--purple);
+  opacity: 0;
+  animation: floatup linear infinite;
+}
+
+@keyframes floatup {
+  0%   { opacity: 0; transform: translateY(0) scale(0); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-100vh) scale(1.5); }
+}
+
+@media (max-width: 500px) {
+  .card { padding: 2.5rem 1.5rem; }
+  .countdown { gap: 0.6rem; }
+  .cd-box { min-width: 58px; padding: 0.8rem 0.9rem; }
+  .cd-num { font-size: 1.4rem; }
+  .notify-row { flex-direction: column; }
+  .tech-row { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob, .icon-main, .icon-ring, .progress-fill,
+  .particle, .badge-dot { animation: none !important; }
+  .progress-fill { width: 68%; }
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient -->
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- Corner -->
+<div class="corner-logo">&lt;ANNAS /&gt;</div>
+
+<!-- Main card -->
+<div class="card">
+
+  <div class="badge">
+    <span class="badge-dot"></span>
+    status · under_construction
+  </div>
+
+  <div class="icon-wrap">
+    <span class="icon-main">🛰️</span>
+    <div class="icon-ring"></div>
+  </div>
+
+  <h1>
+    Something<br/>
+    <span class="grad">Awesome</span><br/>
+    is Coming.
+  </h1>
+
+  <p class="subtitle">
+    We're crafting a new digital experience.<br/>
+    Our team is working hard behind the scenes —<br/>
+    stay tuned and be the first to know.
+  </p>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>// build progress</span>
+      <span id="prog-pct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- Countdown -->
+  <div class="countdown">
+    <div class="cd-box">
+      <div class="cd-num" id="cd-days">00</div>
+      <div class="cd-label">Days</div>
+    </div>
+    <div class="cd-box">
+      <div class="cd-num" id="cd-hours">00</div>
+      <div class="cd-label">Hours</div>
+    </div>
+    <div class="cd-box">
+      <div class="cd-num" id="cd-mins">00</div>
+      <div class="cd-label">Mins</div>
+    </div>
+    <div class="cd-box">
+      <div class="cd-num" id="cd-secs">00</div>
+      <div class="cd-label">Secs</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Notify -->
+  <div class="notify-row">
+    <input class="notify-input" type="email" id="email-input" placeholder="your@email.com"/>
+    <button class="notify-btn" onclick="handleNotify()">Notify Me</button>
+  </div>
+  <div class="notify-success" id="notify-success">✓ You're on the list! We'll notify you.</div>
+
+  <!-- Socials -->
+  <div class="socials">
+    <a href="mailto:your@email.com" class="social-btn">📧 Email</a>
+    <a href="https://linkedin.com/in/yourprofile" class="social-btn" target="_blank">💼 LinkedIn</a>
+    <a href="https://github.com/yourusername" class="social-btn" target="_blank">🐙 GitHub</a>
+  </div>
+
+</div>
+
+<!-- Tech pills -->
+<div class="tech-row">
+  <span class="tech-pill">IT Infrastructure</span>
+  <span class="tech-pill">Network Security</span>
+  <span class="tech-pill">Cloud</span>
+  <span class="tech-pill">Fleet Management System </span>
+  <span class="tech-pill">Mining & Energy</span>
+</div>
+
+<script>
+/* ── COUNTDOWN ───────────────────────── */
+const target = new Date();
+target.setDate(target.getDate() + 30); // 30 days from now
+
+function updateCountdown() {
+  const now  = new Date();
+  const diff = target - now;
+  if (diff <= 0) return;
+
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000)  / 60000);
+  const s = Math.floor((diff % 60000)    / 1000);
+
+  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* ── PROGRESS COUNTER ────────────────── */
+let prog = 0;
+const progEl = document.getElementById('prog-pct');
+const iv = setInterval(() => {
+  if (prog >= 68) { clearInterval(iv); return; }
+  prog++;
+  progEl.textContent = prog + '%';
+}, 35);
+
+/* ── NOTIFY ──────────────────────────── */
+function handleNotify() {
+  const val = document.getElementById('email-input').value.trim();
+  const ok  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  const box = document.getElementById('notify-success');
+  if (!ok) {
+    document.querySelector('.notify-input').style.borderColor = 'rgba(236,72,153,0.6)';
+    return;
+  }
+  document.querySelector('.notify-row').style.display = 'none';
+  box.style.display = 'block';
+}
+
+/* ── PARTICLES ───────────────────────── */
+const container = document.getElementById('particles');
+const colors = ['#7C3AED','#A855F7','#EC4899','#38BDF8','#84CC16'];
+
+for (let i = 0; i < 40; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left     = Math.random() * 100 + 'vw';
+  p.style.top      = Math.random() * 100 + 'vh';
+  p.style.width    = (Math.random() * 3 + 1) + 'px';
+  p.style.height   = p.style.width;
+  p.style.background = colors[Math.floor(Math.random() * colors.length)];
+  p.style.animationDuration  = (Math.random() * 15 + 8) + 's';
+  p.style.animationDelay     = (Math.random() * 10) + 's';
+  container.appendChild(p);
+}
+</script>
+</body>
+</html>
