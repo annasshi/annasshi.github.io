@@ -3,727 +3,979 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Coming Soon · Annas</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet"/>
+<meta name="description" content="Annas — Senior IT Infrastructure & Security Engineer | 10+ Years"/>
+<title>Annas Shi · IT Infrastructure & Security</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..900;1,9..40,100..900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ══════════════════════════════════════════
-   TOKENS
-══════════════════════════════════════════ */
-:root {
-  --bg:       #060810;
-  --bg2:      #0C0F1D;
-  --v1:       #5B21B6;
-  --v2:       #7C3AED;
-  --v3:       #A78BFA;
-  --pk:       #DB2777;
-  --pk2:      #F472B6;
-  --cy:       #0EA5E9;
-  --cy2:      #7DD3FC;
-  --gn:       #65A30D;
-  --gn2:      #BEF264;
-  --wh:       #FAFAFA;
-  --mu:       #4B4B68;
-  --mu2:      #7070A0;
-  --glass:    rgba(255,255,255,0.03);
-  --gb:       rgba(255,255,255,0.06);
-  --f1:       'Outfit', sans-serif;
-  --f2:       'Fira Code', monospace;
+/* ═══════════════════════════
+   TOKENS — PRODUCT DESIGN
+═══════════════════════════ */
+:root{
+  /* Neutrals */
+  --n0:#FFFFFF; --n50:#F9FAFB; --n100:#F3F4F6;
+  --n200:#E5E7EB; --n300:#D1D5DB; --n400:#9CA3AF;
+  --n500:#6B7280; --n600:#4B5563; --n700:#374151;
+  --n800:#1F2937; --n900:#111827; --n950:#030712;
+  /* Brand */
+  --b50:#EEF2FF; --b100:#E0E7FF; --b200:#C7D2FE;
+  --b300:#A5B4FC; --b400:#818CF8; --b500:#6366F1;
+  --b600:#4F46E5; --b700:#4338CA; --b800:#3730A3;
+  /* Accent */
+  --a-rose:#F43F5E; --a-amber:#F59E0B; --a-emerald:#10B981; --a-sky:#0EA5E9; --a-violet:#8B5CF6;
+  /* Surface */
+  --surf:var(--n0); --surf2:var(--n50); --surf3:var(--n100);
+  --bdr:var(--n200); --bdr2:var(--n300);
+  --txt:var(--n900); --txt2:var(--n600); --txt3:var(--n400);
+  /* Font */
+  --f1:'DM Sans',sans-serif;
+  --f2:'Inter',sans-serif;
+  --f3:'DM Mono',monospace;
+  /* Radius */
+  --r-xs:6px; --r-sm:10px; --r:14px; --r-lg:20px; --r-xl:28px;
+  /* Shadow */
+  --sh1:0 1px 2px rgba(0,0,0,.05);
+  --sh2:0 1px 3px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.06);
+  --sh3:0 4px 6px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.09);
+  --sh4:0 8px 16px rgba(0,0,0,.06),0 24px 60px rgba(0,0,0,.12);
+  --sh-brand:0 4px 20px rgba(99,102,241,.28);
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{background:var(--surf2);color:var(--txt);font-family:var(--f1);font-size:15px;line-height:1.6;overflow-x:hidden;}
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{height:100%}
-body{
-  background:var(--bg);
-  color:var(--wh);
-  font-family:var(--f1);
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  position:relative;
-}
-
-/* ══════════════════════════════════════════
-   CANVAS STARFIELD
-══════════════════════════════════════════ */
-#starfield{
-  position:fixed;inset:0;z-index:0;
-  pointer-events:none;
-}
-
-/* ══════════════════════════════════════════
-   AURORA BACKGROUND
-══════════════════════════════════════════ */
-.aurora{
-  position:fixed;inset:0;z-index:1;
-  pointer-events:none;overflow:hidden;
-}
-.aurora-band{
-  position:absolute;
-  width:200%;height:200%;
-  left:-50%;top:-50%;
-  border-radius:40%;
-  opacity:0.07;
-  filter:blur(80px);
-  animation:auroraspin linear infinite;
-}
-.ab1{background:conic-gradient(var(--v2),var(--pk),var(--cy),var(--v2));animation-duration:30s;}
-.ab2{background:conic-gradient(var(--cy),var(--gn),var(--v2),var(--cy));animation-duration:45s;animation-direction:reverse;opacity:0.05;}
-
-@keyframes auroraspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-/* ══════════════════════════════════════════
-   NOISE TEXTURE
-══════════════════════════════════════════ */
+/* ── BG SUBTLE GRADIENT ── */
 body::before{
-  content:'';position:fixed;inset:0;z-index:2;
-  pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  background-size:200px 200px;
-  opacity:0.4;
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 0%,rgba(99,102,241,.06),transparent),
+    radial-gradient(ellipse 50% 40% at 90% 100%,rgba(139,92,246,.05),transparent);
 }
 
-/* ══════════════════════════════════════════
-   SCAN LINE
-══════════════════════════════════════════ */
-body::after{
-  content:'';position:fixed;inset:0;z-index:3;pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+/* ═══════════════════════════
+   NAV — product topbar style
+═══════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:56px;
+  background:rgba(255,255,255,.9);
+  border-bottom:1px solid var(--bdr);
+  backdrop-filter:blur(16px);
+  display:flex;align-items:center;
+  padding:0 2rem;gap:0;
+}
+.nav-logo{
+  font-family:var(--f3);font-size:.82rem;font-weight:500;
+  color:var(--b600);letter-spacing:.04em;
+  margin-right:2.5rem;white-space:nowrap;
+}
+.nav-links{display:flex;align-items:center;gap:.25rem;flex:1;}
+.nav-links a{
+  padding:.45rem .85rem;font-family:var(--f2);font-size:.82rem;font-weight:500;
+  color:var(--txt2);text-decoration:none;border-radius:var(--r-sm);transition:all .15s;
+}
+.nav-links a:hover{background:var(--surf3);color:var(--txt);}
+.nav-links a.active{background:var(--b50);color:var(--b600);}
+.nav-right{
+  display:flex;align-items:center;gap:.6rem;margin-left:auto;
+}
+.nav-status{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-family:var(--f3);font-size:.68rem;
+  color:var(--a-emerald);
+  background:rgba(16,185,129,.07);
+  border:1px solid rgba(16,185,129,.18);
+  padding:.3rem .75rem;border-radius:100px;white-space:nowrap;
+}
+.dot-green{width:6px;height:6px;border-radius:50%;background:var(--a-emerald);animation:pulse-g 2s infinite;}
+@keyframes pulse-g{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,.4)}50%{opacity:.6;box-shadow:0 0 0 5px rgba(16,185,129,0)}}
+.nav-cta{
+  padding:.45rem 1.1rem;background:var(--b600);color:#fff;
+  font-family:var(--f2);font-size:.8rem;font-weight:600;
+  border:none;border-radius:var(--r-sm);cursor:pointer;text-decoration:none;
+  transition:all .15s;box-shadow:var(--sh-brand);
+}
+.nav-cta:hover{background:var(--b700);transform:translateY(-1px);}
+
+/* ═══════════════════════════
+   PAGE
+═══════════════════════════ */
+.page{position:relative;z-index:10;max-width:1120px;margin:0 auto;padding:0 1.5rem 6rem;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ── SECTION ── */
+.sec{margin-bottom:5.5rem;}
+.sec-eyebrow{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--f3);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--b600);margin-bottom:.6rem;
+}
+.sec-eyebrow::before{content:'';display:inline-block;width:16px;height:1.5px;background:var(--b400);border-radius:2px;}
+.sec-title{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:700;letter-spacing:-.03em;color:var(--n900);margin-bottom:.4rem;line-height:1.2;}
+.sec-sub{font-size:.9rem;color:var(--txt2);max-width:580px;line-height:1.8;margin-bottom:2.2rem;}
+
+/* ── CHIP / BADGE ── */
+.chip{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-family:var(--f3);font-size:.6rem;font-weight:500;
+  padding:.2rem .6rem;border-radius:var(--r-xs);border:1px solid;
+  transition:transform .12s;cursor:default;letter-spacing:.02em;
+}
+.chip:hover{transform:scale(1.04);}
+.cv{background:var(--b50);border-color:var(--b200);color:var(--b700);}
+.cp{background:#FFF1F2;border-color:#FECDD3;color:#BE123C;}
+.cc{background:#F0F9FF;border-color:#BAE6FD;color:#0369A1;}
+.cg{background:#F0FDF4;border-color:#BBF7D0;color:#15803D;}
+.co{background:#FFFBEB;border-color:#FDE68A;color:#B45309;}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+
+/* ═══════════════════════════
+   HERO — PRODUCT LANDING
+═══════════════════════════ */
+#hero{
+  padding:7rem 0 4rem;
+  display:grid;grid-template-columns:1fr 460px;
+  gap:4rem;align-items:center;
 }
 
-/* ══════════════════════════════════════════
-   NAV BAR
-══════════════════════════════════════════ */
-.topbar{
-  position:fixed;top:1.5rem;left:50%;transform:translateX(-50%);
-  z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  width:min(700px,92vw);
-  padding:0.7rem 1.2rem 0.7rem 1.5rem;
-  background:rgba(6,8,16,0.7);
-  border:1px solid rgba(255,255,255,0.07);
-  border-radius:100px;
-  backdrop-filter:blur(20px);
-}
-
-.logo{
-  font-family:var(--f2);
-  font-size:0.82rem;
-  letter-spacing:0.06em;
-  background:linear-gradient(90deg,var(--v3),var(--pk2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-
-.topbar-right{
-  display:flex;align-items:center;gap:0.8rem;
-}
-
-.status-pill{
-  display:flex;align-items:center;gap:0.5rem;
-  font-family:var(--f2);font-size:0.68rem;
-  color:var(--gn2);
-  background:rgba(101,163,13,0.1);
-  border:1px solid rgba(101,163,13,0.25);
-  padding:0.3rem 0.8rem;border-radius:100px;
-}
-.sd{width:5px;height:5px;border-radius:50%;background:var(--gn2);animation:blink 2s infinite;}
-@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(190,242,100,0.5)}50%{opacity:0.4;box-shadow:0 0 0 6px rgba(190,242,100,0)}}
-
-/* ══════════════════════════════════════════
-   MAIN WRAP
-══════════════════════════════════════════ */
-.wrap{
-  position:relative;z-index:10;
-  width:min(780px,94vw);
-  display:flex;flex-direction:column;align-items:center;
-  gap:0;
-  padding:2rem 0;
-}
-
-/* ══════════════════════════════════════════
-   HERO SECTION
-══════════════════════════════════════════ */
-.hero-section{
-  text-align:center;
-  margin-bottom:3rem;
-}
-
-/* Orbit system */
-.orbit-sys{
-  position:relative;
-  width:180px;height:180px;
-  margin:0 auto 2.5rem;
-}
-
-.orbit-center{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  z-index:5;
-}
-
-.center-icon{
-  width:70px;height:70px;
-  border-radius:50%;
-  background:linear-gradient(135deg,var(--v2),var(--pk));
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.8rem;
-  box-shadow:0 0 40px rgba(124,58,237,0.5),0 0 80px rgba(124,58,237,0.2);
-  animation:iconpulse 3s ease-in-out infinite;
-}
-
-@keyframes iconpulse{
-  0%,100%{box-shadow:0 0 40px rgba(124,58,237,0.5),0 0 80px rgba(124,58,237,0.2);}
-  50%{box-shadow:0 0 60px rgba(236,72,153,0.6),0 0 100px rgba(236,72,153,0.25);}
-}
-
-.orbit-ring{
-  position:absolute;
-  border-radius:50%;
-  border:1px solid;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-}
-
-.or1{width:110px;height:110px;border-color:rgba(167,139,250,0.2);animation:orbitrot 8s linear infinite;}
-.or2{width:150px;height:150px;border-color:rgba(244,114,182,0.15);animation:orbitrot 14s linear infinite reverse;}
-.or3{width:180px;height:180px;border-color:rgba(125,211,252,0.1);animation:orbitrot 20s linear infinite;}
-
-@keyframes orbitrot{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
-
-.orbit-dot{
-  position:absolute;
-  width:8px;height:8px;border-radius:50%;
-  top:0;left:50%;margin-left:-4px;
-}
-
-.od1{background:var(--v3);box-shadow:0 0 10px var(--v3);}
-.od2{background:var(--pk2);box-shadow:0 0 10px var(--pk2);}
-.od3{background:var(--cy2);box-shadow:0 0 10px var(--cy2);}
-
-/* Pre-headline */
-.pre-hl{
-  font-family:var(--f2);
-  font-size:0.72rem;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:var(--mu2);
-  margin-bottom:1.2rem;
-  display:flex;align-items:center;justify-content:center;gap:0.8rem;
-}
-.pre-hl::before,.pre-hl::after{
-  content:'';display:inline-block;
-  width:30px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--mu));
-}
-.pre-hl::after{background:linear-gradient(90deg,var(--mu),transparent);}
-
-/* Big headline */
-.big-hl{
-  font-size:clamp(3rem,10vw,7rem);
-  font-weight:900;
-  letter-spacing:-0.04em;
-  line-height:0.92;
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--b50);border:1px solid var(--b200);
+  border-radius:100px;padding:.35rem 1rem .35rem .5rem;
   margin-bottom:1.5rem;
 }
-
-.hl-line1{
-  display:block;
-  color:var(--wh);
+.hero-badge-pill{
+  background:var(--b600);color:#fff;
+  font-family:var(--f3);font-size:.6rem;font-weight:500;letter-spacing:.08em;
+  padding:.18rem .55rem;border-radius:100px;text-transform:uppercase;
 }
+.hero-badge-text{font-family:var(--f2);font-size:.8rem;color:var(--b700);font-weight:500;}
 
-.hl-line2{
-  display:block;
-  background:linear-gradient(135deg,var(--v3) 0%,var(--pk2) 40%,var(--cy2) 80%);
+.hero-h1{
+  font-size:clamp(2.6rem,5.5vw,4.4rem);
+  font-weight:800;letter-spacing:-.04em;line-height:1.05;
+  color:var(--n900);margin-bottom:1rem;
+}
+.hero-h1 .grad{
+  background:linear-gradient(135deg,var(--b600),var(--a-violet));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  background-size:300% 100%;
-  animation:flowgrad 5s ease infinite;
 }
 
-@keyframes flowgrad{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+.hero-p{font-family:var(--f2);font-size:.95rem;color:var(--txt2);max-width:460px;line-height:1.9;margin-bottom:2rem;}
+.hero-p strong{color:var(--n800);font-weight:600;}
+
+.hero-btns{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;}
+.hbtn-p{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.85rem 1.8rem;background:var(--b600);color:#fff;
+  border:none;border-radius:var(--r-sm);font-family:var(--f1);font-size:.9rem;font-weight:600;
+  text-decoration:none;cursor:pointer;transition:all .18s;box-shadow:var(--sh-brand);
 }
-
-.hl-line3{
-  display:block;
-  color:rgba(255,255,255,0.12);
-  -webkit-text-stroke:1px rgba(255,255,255,0.15);
+.hbtn-p:hover{background:var(--b700);transform:translateY(-2px);box-shadow:0 6px 28px rgba(79,70,229,.38);}
+.hbtn-s{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.85rem 1.5rem;background:var(--surf);color:var(--n700);
+  border:1.5px solid var(--bdr2);border-radius:var(--r-sm);
+  font-family:var(--f1);font-size:.9rem;font-weight:600;
+  text-decoration:none;cursor:pointer;transition:all .18s;box-shadow:var(--sh1);
 }
+.hbtn-s:hover{border-color:var(--b400);color:var(--b600);transform:translateY(-2px);box-shadow:var(--sh2);}
 
-.sub-text{
-  font-size:1rem;font-weight:300;
-  color:var(--mu2);
-  max-width:440px;
-  margin:0 auto 2.5rem;
-  line-height:1.8;
-}
-
-/* ══════════════════════════════════════════
-   MAIN GLASS CARD
-══════════════════════════════════════════ */
-.main-card{
-  width:100%;
-  background:var(--glass);
-  border:1px solid var(--gb);
-  border-radius:28px;
-  padding:2.5rem;
-  backdrop-filter:blur(30px);
-  position:relative;
-  overflow:hidden;
-  margin-bottom:1.2rem;
-}
-
-/* Top edge glow */
-.main-card::before{
-  content:'';
-  position:absolute;top:0;left:20%;right:20%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--v3),var(--pk2),var(--cy2),transparent);
-}
-
-/* ── COUNTDOWN ── */
-.cd-section{
-  display:flex;align-items:center;justify-content:center;
-  gap:0.5rem;
-  margin-bottom:2rem;
-}
-
-.cd-unit{
-  display:flex;flex-direction:column;align-items:center;
-  flex:1;max-width:110px;
-}
-
-.cd-num{
-  font-size:clamp(2.2rem,6vw,4rem);
-  font-weight:800;
-  letter-spacing:-0.03em;
-  line-height:1;
-  background:linear-gradient(180deg,var(--wh) 60%,rgba(255,255,255,0.4));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  font-variant-numeric:tabular-nums;
-  transition:all 0.1s;
-}
-
-.cd-sep{
-  font-size:2.5rem;font-weight:200;
-  color:rgba(255,255,255,0.15);
-  line-height:1;
-  margin-bottom:1.2rem;
-  align-self:flex-start;
-  margin-top:0.2rem;
-}
-
-.cd-lbl{
-  font-family:var(--f2);
-  font-size:0.6rem;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:var(--mu);
-  margin-top:0.4rem;
-}
-
-/* ── PROGRESS ── */
-.prog-section{
-  margin-bottom:2rem;
-}
-
-.prog-top{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:0.7rem;
-}
-
-.prog-label{
-  font-family:var(--f2);font-size:0.7rem;
-  color:var(--mu2);
-}
-
-.prog-pct{
-  font-family:var(--f2);font-size:0.7rem;
-  color:var(--v3);
-}
-
-.prog-track{
-  height:4px;
-  background:rgba(255,255,255,0.05);
-  border-radius:100px;
-  position:relative;
-  overflow:visible;
-}
-
-.prog-fill{
-  height:100%;width:0%;
-  border-radius:100px;
-  background:linear-gradient(90deg,var(--v2),var(--pk),var(--cy));
-  background-size:200% 100%;
-  animation:fillbar 2.8s cubic-bezier(0.22,1,0.36,1) forwards,flowgrad 4s linear infinite;
-  position:relative;
-}
-
-@keyframes fillbar{from{width:0%}to{width:72%}}
-
-.prog-fill::after{
-  content:'';
-  position:absolute;right:-6px;top:50%;transform:translateY(-50%);
-  width:12px;height:12px;border-radius:50%;
-  background:var(--wh);
-  box-shadow:0 0 12px var(--v3),0 0 24px var(--v3);
-}
-
-/* ── FEATURES ROW ── */
-.feat-row{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:0.8rem;
-  margin-bottom:2rem;
-}
-
-.feat-item{
-  background:rgba(255,255,255,0.02);
-  border:1px solid rgba(255,255,255,0.05);
-  border-radius:14px;
-  padding:1.1rem;
-  text-align:center;
-  transition:all 0.25s;
-  cursor:default;
-}
-
-.feat-item:hover{
-  background:rgba(124,58,237,0.08);
-  border-color:rgba(167,139,250,0.2);
-  transform:translateY(-2px);
-}
-
-.feat-ico{font-size:1.4rem;margin-bottom:0.4rem;display:block;}
-.feat-name{font-size:0.78rem;font-weight:600;color:var(--wh);margin-bottom:0.2rem;}
-.feat-desc{font-size:0.68rem;color:var(--mu);line-height:1.5;}
-
-/* ── NOTIFY ── */
-.notify-section{
-  margin-bottom:0;
-}
-
-.notify-label{
-  font-family:var(--f2);font-size:0.7rem;
-  color:var(--mu2);
-  text-align:center;
-  margin-bottom:1rem;
-  letter-spacing:0.08em;
-}
-
-.notify-row{
-  display:flex;gap:0.6rem;
-  max-width:420px;margin:0 auto;
-}
-
-.n-input{
-  flex:1;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:100px;
-  padding:0.9rem 1.4rem;
-  color:var(--wh);
-  font-family:var(--f1);font-size:0.88rem;
-  outline:none;
-  transition:all 0.2s;
-}
-.n-input::placeholder{color:var(--mu);}
-.n-input:focus{border-color:rgba(167,139,250,0.4);background:rgba(124,58,237,0.06);}
-
-.n-btn{
-  padding:0.9rem 1.8rem;
-  background:linear-gradient(135deg,var(--v2),var(--pk));
-  border:none;border-radius:100px;
-  color:#fff;font-family:var(--f1);font-size:0.88rem;font-weight:600;
-  cursor:pointer;white-space:nowrap;
-  transition:all 0.2s;
+/* Right: product mockup card */
+.hero-mockup{
+  background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r-xl);
+  box-shadow:var(--sh4);padding:1.8rem;
   position:relative;overflow:hidden;
 }
-.n-btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--pk),var(--cy));
-  opacity:0;transition:opacity 0.3s;
+.hero-mockup::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--b500),var(--a-violet),var(--a-rose));
 }
-.n-btn:hover::before{opacity:1;}
-.n-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(219,39,119,0.4);}
-.n-btn span{position:relative;z-index:1;}
-
-.notify-ok{
-  display:none;text-align:center;
-  font-family:var(--f2);font-size:0.78rem;
-  color:var(--gn2);padding:0.8rem;
-  animation:fadein 0.4s ease;
+.mockup-topbar{
+  display:flex;align-items:center;gap:.5rem;margin-bottom:1.2rem;padding-bottom:1rem;
+  border-bottom:1px solid var(--surf3);
 }
-@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-
-/* ══════════════════════════════════════════
-   BOTTOM ROW
-══════════════════════════════════════════ */
-.bottom-row{
-  width:100%;
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1.2rem;
+.mockup-dots{display:flex;gap:.35rem;}
+.mockup-dots span{width:10px;height:10px;border-radius:50%;}
+.md1{background:#FF5F57;}.md2{background:#FFBD2E;}.md3{background:#28C840;}
+.mockup-title{font-family:var(--f3);font-size:.72rem;color:var(--txt3);margin-left:.3rem;}
+.mockup-stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-bottom:1rem;}
+.mstat{
+  background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r);
+  padding:1rem;
+}
+.mstat-n{font-size:1.5rem;font-weight:800;color:var(--n900);line-height:1;}
+.mstat-l{font-family:var(--f3);font-size:.62rem;color:var(--txt3);margin-top:.2rem;text-transform:uppercase;letter-spacing:.08em;}
+.mstat-d{
+  display:inline-flex;align-items:center;gap:.2rem;
+  font-family:var(--f3);font-size:.6rem;color:var(--a-emerald);
+  background:rgba(16,185,129,.08);border-radius:4px;padding:.1rem .35rem;margin-top:.4rem;
+}
+.mockup-list{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1rem;}
+.mlist-item{
+  display:flex;align-items:center;gap:.75rem;
+  background:var(--surf2);border:1px solid var(--bdr);
+  border-radius:var(--r-sm);padding:.75rem 1rem;
+}
+.mlist-ico{
+  width:32px;height:32px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;
+}
+.mlist-info{flex:1;}
+.mlist-name{font-size:.8rem;font-weight:600;color:var(--n800);}
+.mlist-sub{font-family:var(--f3);font-size:.62rem;color:var(--txt3);}
+.mlist-badge{
+  font-family:var(--f3);font-size:.6rem;padding:.15rem .5rem;
+  border-radius:100px;border:1px solid;white-space:nowrap;
+}
+.mb-green{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2);color:var(--a-emerald);}
+.mb-blue{background:var(--b50);border-color:var(--b200);color:var(--b600);}
+.mb-amber{background:#FFFBEB;border-color:#FDE68A;color:#B45309;}
+.mockup-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:.8rem;border-top:1px solid var(--surf3);
+}
+.mf-text{font-family:var(--f3);font-size:.65rem;color:var(--txt3);}
+.mf-pill{
+  background:var(--b600);color:#fff;font-family:var(--f3);font-size:.62rem;
+  padding:.2rem .6rem;border-radius:100px;
 }
 
-.b-card{
-  background:var(--glass);
-  border:1px solid var(--gb);
-  border-radius:20px;
-  padding:1.5rem;
-  backdrop-filter:blur(20px);
-  transition:border-color 0.2s,transform 0.2s;
+/* ═══════════════════════════
+   METRICS ROW
+═══════════════════════════ */
+.metrics{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:var(--r-lg);box-shadow:var(--sh2);
+  overflow:hidden;margin-bottom:5.5rem;
+  position:relative;z-index:10;
 }
-.b-card:hover{border-color:rgba(167,139,250,0.2);transform:translateY(-2px);}
+.metric{
+  padding:1.8rem 1.5rem;text-align:center;
+  border-right:1px solid var(--bdr);transition:background .15s;
+}
+.metric:last-child{border-right:none;}
+.metric:hover{background:var(--b50);}
+.m-num{
+  font-size:2rem;font-weight:800;letter-spacing:-.03em;
+  background:linear-gradient(135deg,var(--b600),var(--a-violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:.35rem;
+}
+.m-lbl{font-family:var(--f3);font-size:.62rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;}
 
-.b-card-lbl{
-  font-family:var(--f2);font-size:0.65rem;
-  color:var(--mu);letter-spacing:0.15em;text-transform:uppercase;
-  margin-bottom:0.8rem;
+/* ═══════════════════════════
+   ABOUT — sidebar layout
+═══════════════════════════ */
+.about-layout{display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start;}
+.about-main{
+  background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r-lg);
+  box-shadow:var(--sh2);overflow:hidden;
+}
+.about-main-top{
+  padding:2rem;border-bottom:1px solid var(--surf3);
+  background:linear-gradient(135deg,var(--b50),rgba(139,92,246,.04));
+  position:relative;
+}
+.about-main-top::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--b500),var(--a-violet));
+}
+.about-main-top h3{font-size:1.15rem;font-weight:700;color:var(--n900);margin-bottom:.8rem;letter-spacing:-.02em;}
+.about-main-top p{font-size:.88rem;color:var(--txt2);line-height:1.9;margin-bottom:.6rem;}
+.about-main-top p b{color:var(--n800);font-weight:600;}
+.about-main-bottom{padding:1.5rem 2rem;}
+.about-main-bottom p{font-size:.88rem;color:var(--txt2);line-height:1.9;margin-bottom:.6rem;}
+.about-main-bottom p b{color:var(--n800);font-weight:600;}
+
+.about-sidebar{display:flex;flex-direction:column;gap:.8rem;}
+.sidebar-card{
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:var(--r);box-shadow:var(--sh1);padding:1.2rem;
+  transition:all .18s;
+}
+.sidebar-card:hover{border-color:var(--b300);box-shadow:var(--sh2);transform:translateY(-2px);}
+.sc-lbl{font-family:var(--f3);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-bottom:.55rem;}
+.sc-val{font-size:.9rem;font-weight:700;color:var(--n900);margin-bottom:.2rem;}
+.sc-sub{font-family:var(--f2);font-size:.75rem;color:var(--txt2);}
+.sc-num{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--b600),var(--a-violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+
+/* ═══════════════════════════
+   PROJECTS — tabbed domains
+═══════════════════════════ */
+.domain-section{margin-bottom:3rem;}
+.domain-header{
+  display:flex;align-items:center;gap:.9rem;
+  padding:1.2rem 1.4rem;
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:var(--r);box-shadow:var(--sh1);
+  margin-bottom:1rem;
+}
+.domain-ico{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;
+}
+.domain-txt .dt-title{font-size:1rem;font-weight:700;color:var(--n900);}
+.domain-txt .dt-sub{font-size:.78rem;color:var(--txt3);font-family:var(--f2);}
+.domain-divider{flex:1;height:1px;background:var(--bdr);}
+
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:1rem;}
+.pcard{
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:var(--r);overflow:hidden;box-shadow:var(--sh1);
+  transition:all .22s;display:flex;flex-direction:column;
+}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--sh3);border-color:var(--b300);}
+.pcard-img{height:160px;overflow:hidden;background:var(--surf3);flex-shrink:0;position:relative;}
+.pcard-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.9);transition:all .4s;}
+.pcard:hover .pcard-img img{filter:brightness(1);transform:scale(1.03);}
+.pcard-badge{
+  position:absolute;top:.7rem;left:.7rem;z-index:5;
+  font-family:var(--f3);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.18rem .6rem;border-radius:100px;font-weight:500;border:1px solid;
+}
+.pcard-body{padding:1.2rem;flex:1;display:flex;flex-direction:column;gap:.55rem;}
+.pcard-name{font-size:.94rem;font-weight:700;color:var(--n900);line-height:1.3;}
+.pcard-desc{font-size:.79rem;color:var(--txt2);line-height:1.7;flex:1;font-family:var(--f2);}
+.pcard-result{
+  font-family:var(--f3);font-size:.62rem;color:var(--a-emerald);
+  background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.14);
+  border-radius:var(--r-xs);padding:.38rem .65rem;
 }
 
-/* Tech stack card */
-.tech-grid{
-  display:flex;flex-wrap:wrap;gap:0.4rem;
+/* ═══════════════════════════
+   SKILLS — product card grid
+═══════════════════════════ */
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;}
+.skcard{
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:var(--r);overflow:hidden;box-shadow:var(--sh1);transition:all .22s;
+}
+.skcard:hover{transform:translateY(-3px);box-shadow:var(--sh3);border-color:var(--b300);}
+.skcard-img{height:130px;overflow:hidden;background:var(--surf3);position:relative;}
+.skcard-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.85) saturate(.85);transition:all .35s;}
+.skcard:hover .skcard-img img{filter:brightness(.95) saturate(1.05);transform:scale(1.03);}
+.skcard-img-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(255,255,255,.95));}
+.skcard-body{padding:1.2rem;}
+.skcard-head{display:flex;align-items:center;gap:.65rem;margin-bottom:.75rem;}
+.sk-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.sk-name{font-size:.9rem;font-weight:700;color:var(--n900);}
+
+/* ═══════════════════════════
+   CERTIFICATIONS
+═══════════════════════════ */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:.9rem;}
+.cert-card{
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:var(--r);padding:1.4rem 1rem;text-align:center;
+  box-shadow:var(--sh1);transition:all .2s;
+}
+.cert-card:hover{transform:translateY(-3px);box-shadow:var(--sh2);border-color:var(--b300);}
+.cert-ico{font-size:1.9rem;margin-bottom:.55rem;display:block;}
+.cert-name{font-size:.8rem;font-weight:700;color:var(--n800);margin-bottom:.2rem;}
+.cert-iss{font-family:var(--f3);font-size:.58rem;color:var(--txt3);}
+.cert-chip{
+  display:inline-block;margin-top:.45rem;font-family:var(--f3);font-size:.55rem;
+  background:var(--b50);border:1px solid var(--b200);color:var(--b700);
+  padding:.1rem .45rem;border-radius:var(--r-xs);
 }
 
-.tc{
-  font-family:var(--f2);font-size:0.62rem;
-  padding:0.25rem 0.65rem;border-radius:6px;
-  border:1px solid;
-  transition:transform 0.15s;cursor:default;
+/* ═══════════════════════════
+   CONTACT
+═══════════════════════════ */
+.contact-split{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:stretch;}
+.contact-left{
+  background:linear-gradient(140deg,var(--b600) 0%,#4338CA 50%,var(--a-violet) 100%);
+  border-radius:var(--r-xl);padding:3rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:0 12px 48px rgba(79,70,229,.35);
+  position:relative;overflow:hidden;
 }
-.tc:hover{transform:scale(1.05);}
-.tc-v{background:rgba(124,58,237,0.1);border-color:rgba(167,139,250,0.25);color:var(--v3);}
-.tc-p{background:rgba(219,39,119,0.1);border-color:rgba(244,114,182,0.25);color:var(--pk2);}
-.tc-c{background:rgba(14,165,233,0.1);border-color:rgba(125,211,252,0.25);color:var(--cy2);}
-.tc-g{background:rgba(101,163,13,0.1);border-color:rgba(190,242,100,0.25);color:var(--gn2);}
-
-/* Social card */
-.soc-list{display:flex;flex-direction:column;gap:0.6rem;}
-.soc-item{
-  display:flex;align-items:center;gap:0.7rem;
-  padding:0.55rem 0.8rem;
-  border-radius:10px;
-  background:rgba(255,255,255,0.02);
-  border:1px solid transparent;
-  text-decoration:none;
-  transition:all 0.2s;
+.contact-left::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:240px;height:240px;border-radius:50%;
+  background:rgba(255,255,255,.06);pointer-events:none;
 }
-.soc-item:hover{background:rgba(124,58,237,0.1);border-color:rgba(167,139,250,0.2);}
-.soc-ico{font-size:1rem;width:1.4rem;text-align:center;}
-.soc-info{}
-.soc-name{font-size:0.78rem;font-weight:600;color:var(--wh);display:block;line-height:1.2;}
-.soc-handle{font-family:var(--f2);font-size:0.62rem;color:var(--mu);display:block;}
+.contact-left::after{
+  content:'';position:absolute;bottom:-60px;left:-40px;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(255,255,255,.04);pointer-events:none;
+}
+.cl-top{position:relative;z-index:1;}
+.cl-ico{
+  width:56px;height:56px;background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);
+  border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:1.5rem;
+}
+.cl-top h3{font-size:1.6rem;font-weight:800;color:#fff;letter-spacing:-.03em;margin-bottom:.7rem;line-height:1.2;}
+.cl-top p{font-size:.88rem;color:rgba(255,255,255,.72);line-height:1.8;}
+.cl-top p b{color:#fff;font-weight:600;}
+.cl-bottom{position:relative;z-index:1;margin-top:2rem;}
+.email-link-btn{
+  display:inline-flex;align-items:center;gap:.7rem;
+  padding:.9rem 1.8rem;background:#fff;color:var(--b700);
+  font-family:var(--f1);font-size:.9rem;font-weight:700;
+  border-radius:var(--r);text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 4px 20px rgba(0,0,0,.18);transition:all .2s;
+}
+.email-link-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.22);}
+.email-str{
+  margin-top:.9rem;font-family:var(--f3);font-size:.72rem;
+  color:rgba(255,255,255,.55);letter-spacing:.06em;
+}
+.contact-right{display:flex;flex-direction:column;gap:1rem;}
+.cinfo-card{
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:var(--r);padding:1.5rem;box-shadow:var(--sh1);
+  transition:all .18s;flex:1;
+}
+.cinfo-card:hover{border-color:var(--b300);box-shadow:var(--sh2);}
+.cinfo-label{
+  font-family:var(--f3);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--txt3);margin-bottom:.6rem;
+}
+.cinfo-val{font-size:.9rem;font-weight:600;color:var(--n800);margin-bottom:.2rem;}
+.cinfo-sub{font-size:.78rem;color:var(--txt2);font-family:var(--f2);}
+.profile-snippet{
+  background:var(--b50);border:1px solid var(--b200);border-radius:var(--r);padding:1.4rem;
+}
+.ps-row{display:flex;align-items:center;gap:.9rem;margin-bottom:1rem;}
+.ps-ava{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--b500),var(--a-violet));
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+}
+.ps-name{font-size:.9rem;font-weight:700;color:var(--n900);}
+.ps-role{font-family:var(--f3);font-size:.63rem;color:var(--b600);}
+.ps-chips{display:flex;flex-wrap:wrap;gap:.35rem;}
 
-/* ══════════════════════════════════════════
+/* ═══════════════════════════
    FOOTER
-══════════════════════════════════════════ */
-.foot{
-  position:fixed;bottom:0;left:0;right:0;
-  z-index:20;
-  padding:0.8rem 2rem;
+═══════════════════════════ */
+footer{
+  position:relative;z-index:10;
+  border-top:1px solid var(--bdr);padding:1.4rem 1.5rem;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(6,8,16,0.7);
-  border-top:1px solid rgba(255,255,255,0.05);
-  backdrop-filter:blur(20px);
-  font-family:var(--f2);font-size:0.65rem;color:var(--mu);
+  font-family:var(--f3);font-size:.62rem;color:var(--txt3);
+  max-width:1120px;margin:0 auto;
 }
+.fl{color:var(--b600);font-weight:500;}
 
-.foot-brand{background:linear-gradient(90deg,var(--v3),var(--pk2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.foot-coords{letter-spacing:0.08em;}
-
-/* ══════════════════════════════════════════
+/* ═══════════════════════════
    RESPONSIVE
-══════════════════════════════════════════ */
-@media(max-width:640px){
-  .topbar{width:95vw;padding:0.6rem 1rem;}
-  .big-hl{font-size:clamp(2.5rem,13vw,4rem);}
-  .feat-row{grid-template-columns:1fr 1fr;}
-  .bottom-row{grid-template-columns:1fr;}
-  .notify-row{flex-direction:column;}
-  .n-btn{border-radius:14px;}
-  .cd-sep{display:none;}
-  .main-card{padding:1.8rem 1.4rem;}
-  .foot{flex-direction:column;gap:0.3rem;text-align:center;}
+═══════════════════════════ */
+@media(max-width:960px){
+  #hero{grid-template-columns:1fr;gap:2rem;padding-top:5.5rem;}
+  .hero-mockup{max-width:440px;}
+  .metrics{grid-template-columns:repeat(2,1fr);}
+  .metric:nth-child(2){border-right:none;}
+  .metric:nth-child(3){border-right:1px solid var(--bdr);}
+  .metric:nth-child(3),.metric:nth-child(4){border-top:1px solid var(--bdr);}
+  .about-layout{grid-template-columns:1fr;}
+  .contact-split{grid-template-columns:1fr;}
 }
-
+@media(max-width:600px){
+  .hero-h1{font-size:clamp(2.2rem,11vw,3rem);}
+  nav{padding:0 1rem;}
+  .nav-links a{padding:.4rem .6rem;font-size:.76rem;}
+  .page{padding:0 1rem 5rem;}
+  footer{flex-direction:column;gap:.4rem;text-align:center;}
+}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;}
-  .prog-fill{width:72%!important;}
+  .reveal{opacity:1;transform:none!important;}
 }
 </style>
 </head>
 <body>
 
-<canvas id="starfield"></canvas>
-<div class="aurora"><div class="aurora-band ab1"></div><div class="aurora-band ab2"></div></div>
-
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="logo">&lt; ANNAS SHI · IT INFRA /&gt;</div>
-  <div class="topbar-right">
-    <div class="status-pill"><span class="sd"></span>building · v2.0</div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">annas-shi.porto</div>
+  <div class="nav-links">
+    <a href="#hero" class="active">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#certifications">Certs</a>
   </div>
-</div>
+  <div class="nav-right">
+    <div class="nav-status"><span class="dot-green"></span>Available</div>
+    <a href="#contact" class="nav-cta">Contact →</a>
+  </div>
+</nav>
 
-<!-- MAIN -->
-<div class="wrap">
+<div class="page">
 
-  <!-- HERO -->
-  <div class="hero-section">
-
-    <div class="orbit-sys">
-      <div class="orbit-ring or1"><div class="orbit-dot od1"></div></div>
-      <div class="orbit-ring or2"><div class="orbit-dot od2"></div></div>
-      <div class="orbit-ring or3"><div class="orbit-dot od3"></div></div>
-      <div class="orbit-center">
-        <div class="center-icon">⚡</div>
-      </div>
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div>
+    <div class="hero-badge">
+      <span class="hero-badge-text">Annas Shibghahtullah</span>
     </div>
-
-    <div class="pre-hl">under construction</div>
-
-    <h1 class="big-hl">
-      <span class="hl-line1">Something</span>
-      <span class="hl-line2">Incredible</span>
-      <span class="hl-line3">is Loading.</span>
+    <h1 class="hero-h1">
+      Senior IT<br/>
+      <span class="grad">Infrastructure</span><br/>
+      &amp; Security Eng.
     </h1>
-
-    <p class="sub-text">
-      We're crafting a next-level digital experience in IT Infrastructure & Security. 
-      The wait will be worth it.
+    <p class="hero-p">
+      <strong>10+ years</strong> architecting resilient enterprise networks, managing hybrid cloud, hardening security, and delivering mission-critical IT for <strong>energy &amp; mining operations</strong> in Indonesia.
     </p>
-
+    <div class="hero-btns">
+      <a href="#projects" class="hbtn-p">View Projects →</a>
+      <a href="#contact" class="hbtn-s">&#128231; Contact Me</a>
+    </div>
   </div>
 
-  <!-- GLASS CARD -->
-  <div class="main-card">
-
-    <!-- COUNTDOWN -->
-    
-
-    <!-- PROGRESS -->
-    <div class="prog-section">
-      <div class="prog-top">
-        <span class="prog-label">// build_progress.log</span>
-        <span class="prog-pct" id="pct">78%</span>
+  <!-- Mockup UI card -->
+  <div class="hero-mockup">
+    <div class="mockup-topbar">
+      <div class="mockup-dots"><span class="md1"></span><span class="md2"></span><span class="md3"></span></div>
+      <div class="mockup-title">monitoring_infrastructure_dashboard.app</div>
+    </div>
+    <div class="mockup-stat-row">
+      <div class="mstat">
+        <div class="mstat-n">200+</div>
+        <div class="mstat-l">Access Points</div>
+        <div class="mstat-d">↑ 99.9% uptime</div>
       </div>
-      <div class="prog-track">
-        <div class="prog-fill" id="pfill"></div>
+      <div class="mstat">
+        <div class="mstat-n">2000+</div>
+        <div class="mstat-l">WiFi Clients</div>
+        <div class="mstat-d">↑ 40+ subnets</div>
       </div>
     </div>
-
-    <!-- FEATURES -->
-   
-
-    <!-- NOTIFY -->
-    
-
+    <div class="mockup-list">
+      <div class="mlist-item">
+        <div class="mlist-ico" style="background:#EEF2FF;">&#128225;</div>
+        <div class="mlist-info"><div class="mlist-name">Wireless Connectivity</div><div class="mlist-sub">HO & Mining Site · 2.4 / 5 GHz</div></div>
+        <span class="mlist-badge mb-green">Active</span>
+      </div>
+      <div class="mlist-item">
+        <div class="mlist-ico" style="background:#FFF1F2;">&#128274;</div>
+        <div class="mlist-info"><div class="mlist-name">Security SIEM & Firewall</div><div class="mlist-sub">SIEM · SD-WAN · IPSec VPN</div></div>
+        <span class="mlist-badge mb-green">Secure</span>
+      </div>
+      <div class="mlist-item">
+        <div class="mlist-ico" style="background:#F0FDF4;">&#9925;</div>
+        <div class="mlist-info"><div class="mlist-name">Cloud Azure Hybrid </div><div class="mlist-sub">Cloud Services· M365 · AD Connect · Etc</div></div>
+        <span class="mlist-badge mb-blue">Synced</span>
+      </div>
+      <div class="mlist-item">
+        <div class="mlist-ico" style="background:#FFFBEB;">&#128667;</div>
+        <div class="mlist-info"><div class="mlist-name">Fleet Management System</div><div class="mlist-sub">Real-time · Mining OT</div></div>
+        <span class="mlist-badge mb-amber">Monitoring</span>
+      </div>
+    </div>
+    <div class="mockup-footer">
+      <div class="mf-text">Last sync: just now</div>
+      <div class="mf-pill">&#10003; All systems operational</div>
+    </div>
   </div>
+</section>
 
-  <!-- BOTTOM ROW -->
-  <div class="bottom-row">
-
-    <!-- Tech stack -->
-   
-
-    <!-- Social -->
-    
-
-  </div>
-
+<!-- METRICS -->
+<div class="metrics reveal">
+  <div class="metric"><div class="m-num">10+</div><div class="m-lbl">Years Experience</div></div>
+  <div class="metric"><div class="m-num">7 SITE </div><div class="m-lbl">Mining Operation</div></div>
+  <div class="metric"><div class="m-num">200+</div><div class="m-lbl">Access Points</div></div>
+  <div class="metric"><div class="m-num">99.9%</div><div class="m-lbl">Uptime Achieved</div></div>
 </div>
 
-<!-- FOOTER -->
-<div class="foot">
-  <span class="foot-brand">ANNAS SHI· IT INFRASTRUCTURE & SECURITY ENGINEER</span>
-  <span class="foot-coords">Indonesia · Mining & Energy Sector</span>
-</div>
+<!-- ══ ABOUT ══ -->
+<section class="sec" id="about">
+  <div class="reveal">
+    <div class="sec-eyebrow">about_me</div>
+    <h2 class="sec-title">Who I Am</h2>
+  </div>
+  <div class="about-layout reveal">
+    <div class="about-main">
+      <div class="about-main-top">
+        <h3>10+ Years Building Infrastructure That Never Fails.</h3>
+        <p>I'm <b>Annas</b>, a Senior IT Infrastructure &amp; Security Engineer Profesional with over a decade of hands-on experience across <b>Network, Server, Cloud, and Security</b> domains — based in <b>Jakarta, Indonesia</b>, serving the coal mining and energy industry.</p>
+        <p>My academic foundation includes a <b>Bachelor's in Information Technology (S1)</b> and a <b>Master's in Management (S2)</b> — giving me both deep technical expertise and the strategic perspective to align IT investments with organizational goals.</p>
+      </div>
+      <div class="about-main-bottom">
+        <p>I specialize in enterprise <b>Server </b>Virtualization, Hybrid Cloud Infrastructure, Wireless Networks, <b>Security Firewall NGFW, SIEM SOAR </b>and Multi-layer Security Hardening. Beyond core IT, I have specialized expertise in <b>Fleet Management Systems</b> for mining operations, <b>Private LTE/5G</b> industrial connectivity, <b> Autonomous systems integration </b>, Radio Link Point-to-Point Microwave Backhaul, and <b>IT Project Management</b>.</p>
+      </div>
+    </div>
+    <div class="about-sidebar">
+      <div class="sidebar-card">
+        <div class="sc-lbl">Education · S1</div>
+        <div class="sc-val">Bachelor of Infromatic Engineering</div>
+        <div class="sc-sub">Networking · Systems · Security</div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sc-lbl">Education · S2</div>
+        <div class="sc-val">Master of Management</div>
+        <div class="sc-sub">Technology Adoption · Operations</div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sc-lbl">Experience</div>
+        <div class="sc-num">10+</div>
+        <div class="sc-sub">Years in IT Infrastructure</div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sc-lbl">Location</div>
+        <div class="sc-val">&#127759; Jakarta -Indonesia</div>
+        <div class="sc-sub">Energy &amp; Coal Mining Industry</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section class="sec" id="projects">
+  <div class="reveal">
+    
+    <h2 class="sec-title">Featured Projects</h2>
+    <p class="sec-sub">Real-world deployments across four core competency domains — built for mission-critical environments.</p>
+  </div>
+
+  <!-- NETWORK -->
+  <div class="domain-section reveal">
+    <div class="domain-header">
+      <div class="domain-ico" style="background:#EEF2FF;">&#128225;</div>
+      <div class="domain-txt"><div class="dt-title">Network Infrastructure</div><div class="dt-sub">Enterprise Wireless · Switching · Routing · Access Point · WAN</div></div>
+      <div class="domain-divider"></div>
+    </div>
+    <div class="proj-grid">
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://www.megadatapratama.com/wp-content/uploads/2024/08/Infrastruktur-Backbone-Fiber-Optic1.jpg?w=600&auto=format&fit=crop&q=80" alt="Network" loading="lazy"/>
+          <div class="pcard-badge cv">Wireless &middot; LAN</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Enterprise Wireless — Mining Site & HO</div>
+          <div class="pcard-desc">Deployed 200+ Multibrands APs across indoor offices, outdoor pit, and industrial zones. Configured RF planning, ARM, and Controller for 2000+ clients across 40+ subnets.</div>
+          <div class="pcard-result">&#10003; 95%+ coverage · 200+ subnets · 99.9% uptime</div>
+          <div class="tags"><span class="chip cv">Cisco, Aruba, Huawei AP</span><span class="chip cv">Cisco, Aruba, Huawei Controller</span><span class="chip cv">Network Accsess Control</span><span class="chip cv">RF Planning</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://www.apcsolutionsuk.com/wp-content/uploads/2021/11/Point-To-Point-Networks.jpg?w=600&auto=format&fit=crop&q=80" alt="SD-WAN" loading="lazy"/>
+          <div class="pcard-badge cv">RADIO PTP & MLTP</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Radio PTP & MLTP Connectivity</div>
+          <div class="pcard-desc">Point-to-point and point-to-multipoint radio technologies are used to provide network connectivity in areas where fiber optic cable deployment is difficult or impractical.</div>
+          <div class="pcard-result">&#10003; 100% Backhaul Connectivity Delivered</div>
+          <div class="tags"><span class="chip cv">Ceragon</span><span class="chip cv">Cambium</span><span class="chip cv">Infinet</span><span class="chip cv">Ubiquiti airFiber</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://canovate.com/wp-content/uploads/2024/09/Canovate-Fiber-Optik-Cozumleri_.jpg?w=600&auto=format&fit=crop&q=80" alt="Fiber" loading="lazy"/>
+          <div class="pcard-badge cv">Physical · FO</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Fiber Optic Backbone Network</div>
+          <div class="pcard-desc">End-to-end fiber optic installation for mining backbone. Supervised splicing, OTDR testing, as-built drawings, and vendor warranty management.</div>
+          <div class="pcard-result">&#10003; Loss ≤0.1 dB · OTDR verified · As-built done</div>
+          <div class="tags"><span class="chip cv">Fiber Optic</span><span class="chip cv">OTDR</span><span class="chip cv">Splicing</span><span class="chip cv">Survey</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVER -->
+  <div class="domain-section reveal">
+    <div class="domain-header">
+      <div class="domain-ico" style="background:#F0F9FF;">&#128187;</div>
+      <div class="domain-txt"><div class="dt-title">Server &amp; Virtualization</div><div class="dt-sub">Windows Server · Linux · VMware · Azure Stack HCI · AD · Backup</div></div>
+      <div class="domain-divider"></div>
+    </div>
+    <div class="proj-grid">
+      
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://www.accuwebhosting.com/blog/wp-content/uploads/2020/04/hyper-virtualization.jpg?w=600&auto=format&fit=crop&q=80" alt="VMware" loading="lazy"/>
+          <div class="pcard-badge cc">Virtualization</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">VMware / Hyper-V Infrastructure</div>
+          <div class="pcard-desc">Consolidated physical servers into VMware ESXi and Hyper-V. Managed Windows/Linux VMs, Active Directory, GPO, DNS, and DHCP for all mining users.</div>
+          <div class="pcard-result">&#10003; Consolidated · AD managed · HA configured</div>
+          <div class="tags"><span class="chip cc">VMware ESXi</span><span class="chip cc">Hyper-V</span><span class="chip cc">Windows Server</span><span class="chip cc">AD</span></div>
+        </div>
+      </div>
+	  <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://files.cdn-files-a.com/uploads/2593542/2000_63c8fc6185a63.png?w=600&auto=format&fit=crop&q=80" alt="Server" loading="lazy"/>
+          <div class="pcard-badge cc">Backup · DR</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Veeam Backup &amp; Disaster Recovery</div>
+          <div class="pcard-desc">Deployed Veeam B&amp;R 12.1 for critical mining servers. Resolved VSS snapshot errors, configured SQL backups, and built DR runbook for remote recovery.</div>
+          <div class="pcard-result">&#10003; RTO &lt;4hr · SQL protected · DR documented</div>
+          <div class="tags"><span class="chip cc">Veeam 12.1</span><span class="chip cc">SQL Server</span><span class="chip cc">VSS</span><span class="chip cc">DR Plan</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCzmCnv4byjtzDC32uFdImluKydo_MHG3LCQwM0_hVBtTOvTYnSJGzRiw&s=10?w=600&auto=format&fit=crop&q=80" alt="Automation" loading="lazy"/>
+          <div class="pcard-badge cc">Automation</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Python Infrastructure Automation</div>
+          <div class="pcard-desc">Built Python scripts (Paramiko + openpyxl) to extract, merge, deduplicate wireless client data from Aruba controllers — generating formatted multi-sheet Excel reports.</div>
+          <div class="pcard-result">&#10003; 445 clients · Dedup · Multi-sheet Excel</div>
+          <div class="tags"><span class="chip cc">Python</span><span class="chip cc">Paramiko</span><span class="chip cc">openpyxl</span><span class="chip cc">SSH</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOUD -->
+  <div class="domain-section reveal">
+    <div class="domain-header">
+      <div class="domain-ico" style="background:#F0FDF4;">&#9925;</div>
+      <div class="domain-txt"><div class="dt-title">Cloud &amp; Digital Transformation</div><div class="dt-sub">Azure · M365 · Hybrid Cloud · Backup · FMS</div></div>
+      <div class="domain-divider"></div>
+    </div>
+    <div class="proj-grid">
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80" alt="Cloud" loading="lazy"/>
+          <div class="pcard-badge cg">Azure · Hybrid</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Hybrid Cloud Infrastructure — Azure</div>
+          <div class="pcard-desc">Integrated on-premise Windows Server with Azure via AD Connect. Deployed M365 with centralized policy and conditional access for all mining site users.</div>
+          <div class="pcard-result">&#10003; Hybrid AD · M365 deployed · Cloud backup</div>
+          <div class="tags"><span class="chip cg">Microsoft Azure</span><span class="chip cg">Azure AD</span><span class="chip cg">M365</span><span class="chip cg">Hybrid</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=600&auto=format&fit=crop&q=80" alt="Backup" loading="lazy"/>
+          <div class="pcard-badge cg">Backup · Cloud</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Cloud Backup &amp; Immutable Storage</div>
+          <div class="pcard-desc">Implemented Veeam cloud backup with immutable object storage — ransomware-proof protection for operational databases, FMS data, and production records.</div>
+          <div class="pcard-result">&#10003; Immutable · 3-2-1 rule · Ransomware protected</div>
+          <div class="tags"><span class="chip cg">Veeam</span><span class="chip cg">Object Storage</span><span class="chip cg">Immutable</span><span class="chip cg">3-2-1</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&auto=format&fit=crop&q=80" alt="FMS" loading="lazy"/>
+          <div class="pcard-badge cg">FMS · Mining</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Fleet Management System Infrastructure</div>
+          <div class="pcard-desc">Supported FMS for real-time dump truck monitoring at PT SIS. Research proved 15% production loss from shift-change gaps without proper FMS utilization.</div>
+          <div class="pcard-result">&#10003; Real-time tracking · 14% shortfall identified</div>
+          <div class="tags"><span class="chip cg">FMS</span><span class="chip cg">IoT</span><span class="chip cg">Mining OT</span><span class="chip cg">Real-time</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECURITY -->
+  <div class="domain-section reveal">
+    <div class="domain-header">
+      <div class="domain-ico" style="background:#FFF1F2;">&#128274;</div>
+      <div class="domain-txt"><div class="dt-title">Security</div><div class="dt-sub">NGFW · Zero Trust · 802.1X · Cyber Defense</div></div>
+      <div class="domain-divider"></div>
+    </div>
+    <div class="proj-grid">
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&auto=format&fit=crop&q=80" alt="NGFW" loading="lazy"/>
+          <div class="pcard-badge cp">NGFW · Security</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Palo Alto NGFW Deployment</div>
+          <div class="pcard-desc">Deployed Palo Alto NGFW with App-ID, User-ID, threat prevention, URL filtering, and zone-based security policies for internet and inter-VLAN traffic.</div>
+          <div class="pcard-result">&#10003; App-ID · Threat prevention · Zero-trust zones</div>
+          <div class="tags"><span class="chip cp">Palo Alto</span><span class="chip cp">App-ID</span><span class="chip cp">Threat Prev.</span><span class="chip cp">Zones</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=600&auto=format&fit=crop&q=80" alt="802.1X" loading="lazy"/>
+          <div class="pcard-badge cp">NAC · 802.1X</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Network Access Control — 802.1X</div>
+          <div class="pcard-desc">Implemented 802.1X with RADIUS on Aruba switches and APs. Combined with DHCP Snooping, DAI, and IP Source Guard to fully harden Layer 2 security.</div>
+          <div class="pcard-result">&#10003; 802.1X enforced · Rogue blocked · L2 hardened</div>
+          <div class="tags"><span class="chip cp">802.1X</span><span class="chip cp">RADIUS</span><span class="chip cp">DAI</span><span class="chip cp">DHCP Snoop</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&auto=format&fit=crop&q=80" alt="Zero Trust" loading="lazy"/>
+          <div class="pcard-badge cp">Zero Trust</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">Zero Trust Security Architecture</div>
+          <div class="pcard-desc">Designed Zero Trust framework — micro-segmentation with VLAN, encrypted tunnels, least-privilege access, and continuous verification across all mining IT systems.</div>
+          <div class="pcard-result">&#10003; Micro-segmented · Least privilege · E2E encrypted</div>
+          <div class="tags"><span class="chip cp">Zero Trust</span><span class="chip cp">Micro-seg</span><span class="chip cp">VPN</span><span class="chip cp">ACL</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SKILLS ══ -->
+<section class="sec" id="skills">
+  <div class="reveal">
+    <div class="sec-eyebrow">tech_stack</div>
+    <h2 class="sec-title">Skills &amp; Expertise</h2>
+    <p class="sec-sub">9 specialized domains — from enterprise IT infrastructure to emerging industrial technologies.</p>
+  </div>
+  <div class="skill-grid reveal">
+
+    <div class="skcard">
+      <div class="skcard-img"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500&auto=format&fit=crop&q=75" alt="Net" loading="lazy"/><div class="skcard-img-ov"></div></div>
+      <div class="skcard-body"><div class="skcard-head"><div class="sk-ico" style="background:#EEF2FF;">&#128225;</div><div class="sk-name">Network Infrastructure</div></div>
+      <div class="tags"><span class="chip cv">Aruba Wireless</span><span class="chip cv">Aruba Central</span><span class="chip cv">Aruba 6100</span><span class="chip cv">RF Planning</span><span class="chip cv">VLAN/STP</span><span class="chip cv">OSPF/LACP</span><span class="chip cv">QoS</span><span class="chip cv">WAN</span></div></div>
+    </div>
+
+    <div class="skcard">
+      <div class="skcard-img"><img src="https://images.unsplash.com/photo-1597733336794-12d05021d510?w=500&auto=format&fit=crop&q=75" alt="Srv" loading="lazy"/><div class="skcard-img-ov"></div></div>
+      <div class="skcard-body"><div class="skcard-head"><div class="sk-ico" style="background:#F0F9FF;">&#128187;</div><div class="sk-name">Server &amp; Virtualization</div></div>
+      <div class="tags"><span class="chip cc">Windows Server</span><span class="chip cc">Linux</span><span class="chip cc">Active Directory</span><span class="chip cc">VMware</span><span class="chip cc">Hyper-V</span><span class="chip cc">DNS/DHCP</span><span class="chip cc">SQL Server</span></div></div>
+    </div>
+
+    <div class="skcard">
+      <div class="skcard-img"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&auto=format&fit=crop&q=75" alt="Cloud" loading="lazy"/><div class="skcard-img-ov"></div></div>
+      <div class="skcard-body"><div class="skcard-head"><div class="sk-ico" style="background:#F0FDF4;">&#9925;</div><div class="sk-name">Cloud &amp; Backup</div></div>
+      <div class="tags"><span class="chip cg">Microsoft Azure</span><span class="chip cg">M365</span><span class="chip cg">Veeam B&amp;R</span><span class="chip cg">Disaster Recovery</span><span class="chip cg">Hybrid Cloud</span><span class="chip cg">Object Storage</span></div></div>
+    </div>
+
+    <div class="skcard">
+      <div class="skcard-img"><img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=500&auto=format&fit=crop&q=75" alt="Sec" loading="lazy"/><div class="skcard-img-ov"></div></div>
+      <div class="skcard-body"><div class="skcard-head"><div class="sk-ico" style="background:#FFF1F2;">&#128274;</div><div class="sk-name">Security</div></div>
+      <div class="tags"><span class="chip cp">Palo Alto NGFW</span><span class="chip cp">SD-WAN</span><span class="chip cp">IPSec VPN</span><span class="chip cp">Zero Trust</span><span class="chip cp">802.1X</span><span class="chip cp">DAI</span><span class="chip cp">ACL</span></div></div>
+    </div>
+
+    <div class="skcard">
+      <div class="skcard-img"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500&auto=format&fit=crop&q=75" alt="FMS" loading="lazy"/><div class="skcard-img-ov"></div></div>
+      <div class="skcard-body"><div class="skcard-head"><div class="sk-ico" style="background:#FFFBEB;">&#128667;</div><div class="sk-name">Fleet Mgmt System — Mining</div></div>
+      <div class="tags"><span class="chip co">FMS Infrastructure</span><span class="chip co">IoT</span><span class="chip co">Real-time Tracking</span><span class="chip co">OT Integration</span><span class="chip co">GPS/Telematics</span></div></div>
+    </div>
+
+    <div class="skcard">
+      <div class="skcard-img"><img src="https://images.unsplash.com/photo-1520869562399-e772f042f422?w=500&auto=format&fit=crop&q=75" alt="LTE" loading="lazy"/><div class="skcard-img-ov"></div></div>
+      <div class="skcard-body"><div class="skcard-head"><div class="sk-ico" style="background:#EEF2FF;">&#128246;</div><div class="sk-name">Private LTE / 5G</div></div>
+      <div class="tags"><span class="chip cv">Private LTE</span><span class="chip cv">Private 5G</span><span class="chip cv">Core Network</span><span class="chip cv">MEC</span><span class="chip cv">eNB/gNB</span><span class="chip cv">Spectrum Planning</span></div></div>
+    </div>
+
+    <div class="skcard">
+      <div class="skcard-img"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500&auto=format&fit=crop&q=75" alt="Auto" loading="lazy"/><div class="skcard-img-ov"></div></div>
+      <div class="skcard-body"><div class="skcard-head"><div class="sk-ico" style="background:#F0FDF4;">&#129302;</div><div class="sk-name">Autonomous Systems</div></div>
+      <div class="tags"><span class="chip cg">AHS Haulage</span><span class="chip cg">Remote Control</span><span class="chip cg">Low-Latency Net</span><span class="chip cg">Edge Computing</span><span class="chip cg">OT/IT Convergence</span></div></div>
+    </div>
+
+    <div class="skcard">
+      <div class="skcard-img"><img src="https://images.unsplash.com/photo-1609743522653-52354461eb27?w=500&auto=format&fit=crop&q=75" alt="PtP" loading="lazy"/><div class="skcard-img-ov"></div></div>
+      <div class="skcard-body"><div class="skcard-head"><div class="sk-ico" style="background:#F0F9FF;">&#128251;</div><div class="sk-name">Radio Link Point-to-Point</div></div>
+      <div class="tags"><span class="chip cc">Microwave Backhaul</span><span class="chip cc">PtP/PtMP</span><span class="chip cc">Licensed Band</span><span class="chip cc">Ubiquiti/Cambium</span><span class="chip cc">Link Budget</span></div></div>
+    </div>
+
+    <div class="skcard">
+      <div class="skcard-img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&auto=format&fit=crop&q=75" alt="PM" loading="lazy"/><div class="skcard-img-ov"></div></div>
+      <div class="skcard-body"><div class="skcard-head"><div class="sk-ico" style="background:#FFFBEB;">&#128203;</div><div class="sk-name">Project Management</div></div>
+      <div class="tags"><span class="chip co">IT Project Planning</span><span class="chip co">Stakeholder Mgmt</span><span class="chip co">Budget Planning</span><span class="chip co">Risk Mgmt</span><span class="chip co">ITIL</span><span class="chip co">Agile</span></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CERTIFICATIONS ══ -->
+<section class="sec" id="certifications">
+  <div class="reveal">
+    <div class="sec-eyebrow">credentials</div>
+    <h2 class="sec-title">Certifications</h2>
+  </div>
+  <div class="cert-grid reveal">
+    <div class="cert-card"><span class="cert-ico">&#127885;</span><div class="cert-name">Aruba Certified ACMA</div><div class="cert-iss">Aruba / HPE</div><span class="cert-chip">Wireless</span></div>
+    <div class="cert-card"><span class="cert-ico">&#128272;</span><div class="cert-name">Palo Alto PCNSA</div><div class="cert-iss">Palo Alto Networks</div><span class="cert-chip">Security</span></div>
+    <div class="cert-card"><span class="cert-ico">&#127760;</span><div class="cert-name">CompTIA Network+</div><div class="cert-iss">CompTIA</div><span class="cert-chip">Networking</span></div>
+    <div class="cert-card"><span class="cert-ico">&#128737;</span><div class="cert-name">CompTIA Security+</div><div class="cert-iss">CompTIA</div><span class="cert-chip">Security</span></div>
+    <div class="cert-card"><span class="cert-ico">&#128225;</span><div class="cert-name">CCNA</div><div class="cert-iss">Cisco Systems</div><span class="cert-chip">Networking</span></div>
+    <div class="cert-card"><span class="cert-ico">&#9925;</span><div class="cert-name">Azure AZ-900</div><div class="cert-iss">Microsoft</div><span class="cert-chip">Cloud</span></div>
+    <div class="cert-card"><span class="cert-ico">&#128190;</span><div class="cert-name">Veeam VMCE</div><div class="cert-iss">Veeam Software</div><span class="cert-chip">Backup &amp; DR</span></div>
+    <div class="cert-card"><span class="cert-ico">&#9881;</span><div class="cert-name">ITIL Foundation</div><div class="cert-iss">Axelos</div><span class="cert-chip">ITSM</span></div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="sec" id="contact">
+  <div class="reveal">
+    <div class="sec-eyebrow">contact_me</div>
+    <h2 class="sec-title">Contact Me</h2>
+  </div>
+  <div class="contact-split reveal">
+    <div class="contact-left">
+      <div class="cl-top">
+        <div class="cl-ico">&#128231;</div>
+        <h3>Let's build something great together.</h3>
+        <p>Open to <b>infrastructure consulting</b>, network security projects, and collaborations in energy &amp; mining technology. Drop me an email — I'll get back to you.</p>
+      </div>
+      <div class="cl-bottom">
+        <a href="mailto:your@email.com" class="email-link-btn">
+          <span>&#128231;</span> Send Me an Email
+        </a>
+        <div class="email-str">your@email.com</div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="profile-snippet">
+        <div class="ps-row">
+          <div class="ps-ava">&#128752;</div>
+          <div><div class="ps-name">Annas</div><div class="ps-role">Senior IT Infrastructure &amp; Security Eng.</div></div>
+        </div>
+        <div class="ps-chips">
+          <span class="chip cv">Network</span><span class="chip cc">Server</span><span class="chip cg">Cloud</span><span class="chip cp">Security</span>
+          <span class="chip co">FMS Mining</span><span class="chip cv">Private 5G</span>
+        </div>
+      </div>
+      <div class="cinfo-card">
+        <div class="cinfo-label">Location</div>
+        <div class="cinfo-val">&#127759; Kalimantan Tengah, Indonesia</div>
+        <div class="cinfo-sub">Energy &amp; Coal Mining Industry</div>
+      </div>
+      <div class="cinfo-card">
+        <div class="cinfo-label">Education</div>
+        <div class="cinfo-val">S1 Information Technology</div>
+        <div class="cinfo-sub">S2 Master of Business Management</div>
+      </div>
+      <div class="cinfo-card">
+        <div class="cinfo-label">Status</div>
+        <div class="cinfo-val" style="display:flex;align-items:center;gap:.5rem;"><span class="dot-green"></span> Available for Collaboration</div>
+        <div class="cinfo-sub">Open to consulting &amp; projects</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- .page -->
+
+<footer>
+  <span class="fl">ANNAS · Senior IT Infrastructure &amp; Security Engineer</span>
+  <span>&copy; 2025 · GitHub Pages · Kalimantan Tengah, Indonesia</span>
+</footer>
 
 <script>
-/* ── STARFIELD CANVAS ──────────────────────────────── */
-(function(){
-  const c = document.getElementById('starfield');
-  const ctx = c.getContext('2d');
-  let W, H, stars = [];
-
-  function resize(){
-    W = c.width  = window.innerWidth;
-    H = c.height = window.innerHeight;
-  }
-
-  function mkStars(){
-    stars = [];
-    for(let i=0;i<180;i++){
-      stars.push({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        r: Math.random()*1.2+0.2,
-        a: Math.random(),
-        da: (Math.random()-0.5)*0.005,
-        dx: (Math.random()-0.5)*0.08,
-        dy: (Math.random()-0.5)*0.04,
-      });
-    }
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    stars.forEach(s=>{
-      s.a = Math.max(0.05, Math.min(1, s.a + s.da));
-      if(s.a<=0.05||s.a>=1) s.da*=-1;
-      s.x = (s.x+s.dx+W)%W;
-      s.y = (s.y+s.dy+H)%H;
-      ctx.beginPath();
-      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle = `rgba(200,210,255,${s.a})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-
-  resize(); mkStars(); draw();
-  window.addEventListener('resize',()=>{resize();mkStars();});
-})();
-
-/* ── COUNTDOWN ─────────────────────────────────────── */
-const launch = new Date(Date.now() + 30*24*3600*1000);
-function tick(){
-  const t = launch - Date.now();
-  if(t<=0) return;
-  const pad = n => String(Math.floor(n)).padStart(2,'0');
-  document.getElementById('d').textContent = pad(t/86400000);
-  document.getElementById('h').textContent = pad((t%86400000)/3600000);
-  document.getElementById('m').textContent = pad((t%3600000)/60000);
-  document.getElementById('s').textContent = pad((t%60000)/1000);
-}
-setInterval(tick,1000); tick();
-
-/* ── PROGRESS COUNTER ──────────────────────────────── */
-let p=0;
-const pEl=document.getElementById('pct');
-const iv=setInterval(()=>{
-  if(p>=72){clearInterval(iv);return;}
-  p++;
-  pEl.textContent=p+'%';
-},28);
-
-/* ── NOTIFY ────────────────────────────────────────── */
-function doNotify(){
-  const v=document.getElementById('nemail').value.trim();
-  const ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  const inp=document.querySelector('.n-input');
-  if(!ok){
-    inp.style.borderColor='rgba(219,39,119,0.6)';
-    inp.focus();
-    return;
-  }
-  document.getElementById('nrow').style.display='none';
-  document.getElementById('nok').style.display='block';
-}
-document.getElementById('nemail').addEventListener('keydown',e=>{
-  if(e.key==='Enter') doNotify();
-});
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const secs=[...document.querySelectorAll('section[id]')];
+const links=[...document.querySelectorAll('.nav-links a')];
+addEventListener('scroll',()=>{
+  let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-100)cur=s.id;});
+  links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+},{passive:true});
 </script>
 </body>
 </html>
